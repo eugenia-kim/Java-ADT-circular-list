@@ -1,39 +1,38 @@
-public class CircularList<T extends Comparable> {
+public class CircularList<T extends Comparable<T>> {
 	Node<T> head;
 
-	public CircularList<T> add(S data) {
+	public CircularList<T> add(T data) {
 		Node<T> addedNode = new Node<T>(data);
-		if (head.equals(null)) {
+		if (head == null) {
 			head = addedNode;
 			head.setNext(head);
 			head.setFlag();
 		} else {
 			if (!(search(data))) {
 				Node<T> currentNode = head.getNext();
-				Node<T> afterNode = current.getNext();
+				Node<T> afterNode = currentNode.getNext();
 				while (true) {
 					if (afterNode.getFlag()) {
 						currentNode.setNext(addedNode);
 						addedNode.setNext(head);
-						return;
+						return this;
 					} else {
 						currentNode = currentNode.getNext();
 						afterNode = afterNode.getNext();
 					}
-
 				}
 			}
 		}
 		return this;
 	}
 
-	public boolean search(S data) {
+	public boolean search(T data) {
 		Node<T> currentNode = head.getNext();
 		boolean found = false;
 		if (head.getData().equals(data)) {
 			return !(found);
 		}
-		while (currentNode.getFlag()) {
+		while (!(currentNode.getFlag())) {
 			if (currentNode.getData().equals(data)) {
 				return !(found);
 			} else {
@@ -44,15 +43,15 @@ public class CircularList<T extends Comparable> {
 	}
 	
 	public boolean isEmpty() {
-		return (head.equals(null));
+		return (head == null);
 	}
 	
 	public CircularList<T> clear() {
-		head.equals(null);
+		head = null;
 		return this;
 	}
 
-	private class Node<S extends Comparable> {
+	public class Node<S extends Comparable<S>> {
 		boolean f_head = false;
 		S data;
 		Node<S> reference;
